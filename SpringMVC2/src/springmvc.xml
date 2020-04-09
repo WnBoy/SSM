@@ -27,5 +27,34 @@
         <property name="basename" value="i18n"></property>
     </bean>
 
+    <!--配置请求直接跳转，无需handler处理-->
+    <!--<mvc:view-controller path="/i18n" view-name="i18n"/>-->
+    <mvc:view-controller path="/i18n2" view-name="i18n2"/>
+
+    <!--配置SessionLocaleResolver-->
+    <bean id="localeResolver"
+          class="org.springframework.web.servlet.i18n.SessionLocaleResolver"></bean>
+
+    <!--配置拦截器-->
+    <mvc:interceptors>
+        <!--配置拦截器1-->
+        <bean class="com.xupt.springmvc.interceptor.FirstInterceptor"></bean>
+
+        <!-- 配置拦截器(不)作用的路径 -->
+        <mvc:interceptor>
+            <mvc:mapping path="/emps"/>
+            <bean class="com.xupt.springmvc.interceptor.SecondInterceptor"></bean>
+        </mvc:interceptor>
+
+        <!-- 配置 LocaleChanceInterceptor -->
+        <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"></bean>
+    </mvc:interceptors>
+
+    <!--文件上传配置-->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="utf-8"></property>
+        <property name="maxUploadSize" value="52428000"></property>
+    </bean>
 
 </beans>
