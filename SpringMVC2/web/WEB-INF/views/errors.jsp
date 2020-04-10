@@ -11,6 +11,6 @@
     <title>Title</title>
 </head>
 <body>
-<h3>异常信息：${requestScope.exception}</h3>
+<h3>异常信息：${requestScope.ex}</h3>
 </body>
 </html>
