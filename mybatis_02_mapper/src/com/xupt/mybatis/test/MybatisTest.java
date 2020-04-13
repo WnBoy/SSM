@@ -12,6 +12,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -109,17 +110,28 @@ public class MybatisTest {
         try {
             EmployeeMapper mapper = sqlSession.getMapper(EmployeeMapper.class);
             //测试增加的方法
-//            mapper.addEmp(new Employee("jackson","jackson@qq.com","0"));
+//            for (int i = 2; i < 7; i++) {
+//                mapper.addEmp(new Employee("jackson"+i,"jackson@qq.com","0"));
+//            }
             //测试修改的方法
 //            mapper.updateEmp(new Employee(4,"jackson","jackson@163.com","1"));
             //测试删除的方法
-            Integer integer = mapper.deleteEmp(4);
-            System.out.println(4);
+//            Integer integer = mapper.deleteEmp(4);
+//            System.out.println(4);
             //提交
+
+//            List<Employee> empsByName = mapper.getEmpsByName("%jack%");
+
+//            Map<String, Object> empByIdReturnMap = mapper.getEmpByIdReturnMap(1);
+            Map<Integer, Employee> empsByNameLikeReturnMap = mapper.getEmpsByNameLikeReturnMap("%jack%");
+
+            System.out.println(empsByNameLikeReturnMap);
             sqlSession.commit();
         } finally {
             sqlSession.close();
         }
     }
+
+
 
 }

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xupt.mybatis.dao.DepartmentMapper">
+
+    <select id="getDepById" resultType="com.xupt.mybatis.pojo.Department">
+        select * from tbl_dept where id=#{id}
+    </select>
+
+
+    <!--
+    查询出来的字段值： did  dept_name     eid  last_name  gender  email
+    嵌套结果集的方式，使用collection标签定义关联的集合类型的属性封装规则
+    -->
+    <resultMap id="MyDept" type="com.xupt.mybatis.pojo.Department">
+        <id column="did" property="id"/>
+        <result column="dept_name" property="deptName"/>
+        <!--collection定义关联集合类型的属性的封装规则
+            ofType:指定集合里面元素的类型-->
+        <collection property="emps" ofType="com.xupt.mybatis.pojo.Employee">
+            <!-- 定义这个集合中元素的封装规则 -->
+            <id column="eid" property="id"/>
+            <result column="last_name" property="lastName"/>
+            <result column="gender" property="gender"/>
+            <result column="email" property="email"/>
+        </collection>
+    </resultMap>
+
+    <select id="getDepByIdPlus" resultMap="MyDept">
+        SELECT d.id did,d.dept_name dept_name,
+        e.id eid,e.last_name last_name,e.gender gender,e.email email
+        FROM tbl_dept d
+        INNER JOIN tbl_employee e
+        ON d.id=e.d_id
+        WHERE d.id=#{id}
+    </select>
+
+
+
+<!--collection的分步查询演示-->
+   <resultMap id="MyDept2" type="com.xupt.mybatis.pojo.Department" >
+       <id column="id" property="id"/>
+       <result column="dept_name" property="deptName"/>
+       <collection property="emps"
+                   select="com.xupt.mybatis.dao.EmployeeMapperPlus.getEmpsByDeptId"
+                   column="{deptId=id}"
+                   fetchType="eager"/>
+   </resultMap>
+
+    <select id="getDepByIdStep" resultMap="MyDept2">
+        SELECT id,dept_name FROM tbl_dept WHERE id=#{id}
+    </select>
+</mapper>

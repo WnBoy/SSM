@@ -9,6 +9,22 @@
     resultType：返回值类型
     id:占位符
     -->
+
+    <!--public Map<Integer,Employee> getEmpsByNameLikeReturnMap(String namePatter);-->
+    <select id="getEmpsByNameLikeReturnMap" resultType="Employee">
+        select * from tbl_employee where last_name like #{namePatter}
+    </select>
+
+    <!--public Map<String,Object> getEmpByIdReturnMap(Integer id);-->
+    <select id="getEmpByIdReturnMap" resultType="map">
+        select * from tbl_employee where id=#{id}
+    </select>
+
+    <!--public List<Employee> getEmpsByName(String namePatter);-->
+    <select id="getEmpsByName" resultType="Employee">
+      select * from tbl_employee where last_name like #{namePatter}
+    </select>
+
     <!--public Employee getEMpByMap(Map<String,Object>map);-->
     <select id="getEmpByMap" resultType="Employee" databaseId="mysql">
       select id,last_name lastName,gender, email
