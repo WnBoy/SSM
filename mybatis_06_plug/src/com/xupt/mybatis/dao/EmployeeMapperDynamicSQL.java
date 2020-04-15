@@ -18,10 +18,10 @@ public interface EmployeeMapperDynamicSQL {
     public void updateEmp(Employee employee);
 
     //查询员工id'在给定集合中的
-    public List<Employee> getEmpsByConditionForeach(@Param("ids")List<Integer> ids);
+    public List<Employee> getEmpsByConditionForeach(@Param("ids") List<Integer> ids);
 
     //批量保存
-    public void insertEmployeesByForeach(@Param("emps") List<Employee>emps);
+    public void insertEmployeesByForeach(@Param("emps") List<Employee> emps);
 
 
     public List<Employee> getEmpsByInnerParameter(Employee employee);

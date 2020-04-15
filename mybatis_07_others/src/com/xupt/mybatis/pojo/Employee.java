@@ -14,6 +14,7 @@ public class Employee implements Serializable {
     private String email;
     private String gender;
 
+    private EmpStatus empStatus=EmpStatus.LOGIN;
     //员工的部门
     private Department department;
 
@@ -26,6 +27,14 @@ public class Employee implements Serializable {
     }
 
     public Employee() {
+    }
+
+    public EmpStatus getEmpStatus() {
+        return empStatus;
+    }
+
+    public void setEmpStatus(EmpStatus empStatus) {
+        this.empStatus = empStatus;
     }
 
     public Department getDepartment() {

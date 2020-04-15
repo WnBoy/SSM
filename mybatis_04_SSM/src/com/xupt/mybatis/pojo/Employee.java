@@ -1,40 +1,34 @@
 package com.xupt.mybatis.pojo;
 
-import java.io.Serializable;
-
 /**
  * @author Wnlife
  * @create 2020-04-11 9:41
  */
 
-public class Employee implements Serializable {
-    private static final long serialVersionUID =1L;
+public class Employee {
+
     private Integer id;
     private String lastName;
     private String email;
     private String gender;
 
-    //员工的部门
-    private Department department;
-
-    public Employee(Integer id, String lastName, String email, String gender, Department department) {
-        this.id = id;
-        this.lastName = lastName;
-        this.email = email;
-        this.gender = gender;
-        this.department = department;
-    }
 
     public Employee() {
     }
 
-    public Department getDepartment() {
-        return department;
+    public Employee(String lastName, String email, String gender) {
+        this.lastName = lastName;
+        this.email = email;
+        this.gender = gender;
     }
 
-    public void setDepartment(Department department) {
-        this.department = department;
+    public Employee(Integer id, String lastName, String email, String gender) {
+        this.id = id;
+        this.lastName = lastName;
+        this.email = email;
+        this.gender = gender;
     }
+
 
     public Integer getId() {
         return id;
